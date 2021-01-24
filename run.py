@@ -2,7 +2,6 @@ import os
 from datetime import datetime
 from flask import Flask, redirect, render_template, request, session
 
-
 app = Flask(__name__)
 app.secret_key = "bissamsekele123"
 messages = []
@@ -10,7 +9,7 @@ messages = []
 
 def add_messages(username, message):
     """ Add messages to the `messages` list"""
-    now = datetime.now().strftime("%H:%M:%S")
+    now = datetime.now().strftime("%B %d, %H:%M:%S")
     messages_dict = {"timestamp": now, "from": username, "message": message}
     messages.append(messages_dict)
 
