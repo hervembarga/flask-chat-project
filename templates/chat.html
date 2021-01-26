@@ -4,6 +4,14 @@
  <title>Chat page of {{ username }}</title>
   {% endblock %}
 {% block content %}
+<!-- Navigation -->
+  <nav class="navbar navbar-light bg-light static-top">
+    <div class="container">
+      <a class="navbar-brand mr-auto" href="#">PeopleChat</a>
+    <a class="btn btn-primary" href="{{ url_for('logout') }}">log out</a>
+    </div>
+  </nav>
+
 <div class="container-md">
     <div class="row justify-content-center mt-5 mb-4">
         <div class="col-md-8 text-center">
@@ -13,28 +21,32 @@
                 <br>
                 <button class="btn btn-success mb-4">Send message</button>
             </form>
+            <!-- Render messages list-->
             {% for message in chat_messages %}
-                
-            <div class="media mb-3 border rounded">
+             <div  class="texto media mb-3 border rounded">  
+            
                 <div class="media-body ">
                     <div class="">
                         <h6 class="text-small  py-2 mb-0">{{ message.from.upper()}}</h6>
                     </div>
                     <div class="bg-light py-2 px-3 mb-2">
-                        <p class="text-small mb-0">{{ message.message }}</p>
+                        <p class="sup text-small mb-0">{{ message.message }}</p>
                     </div>
                     <p class="small text-muted text-right pr-2 font-italic">{{ message.timestamp }} </p>
                 </div>
             </div>
             
             {% endfor %}
-
+            
+           
+        <a  href="{{ url_for('clear') }}" ><button id="mybtn" class=" btn btn-danger mb-4">clear message(s)</button></a>
         </div>
     </div>
 </div>
+    
+   
     <script>
         let textbox = document.getElementById("message")
-
         let timer = setTimeout(function(){
             location.reload();
         }, 5000)

@@ -27,7 +27,6 @@ def index():
 @app.route("/<username>", methods=["GET", "POST"])
 def user(username):
     """Display chat messages"""
-
     if request.method == "POST":
         message = request.form["message"]
         add_messages(username, message)
@@ -43,10 +42,21 @@ def send_message(username, message):
     return redirect("/" + username)
 
 
+@app.route("/clear")
+def clear():
+    """clear all messages """
+    messages.clear()
+    return redirect("/"+session["username"])
+
+
+@app.route("/logout")
+def logout():
+    """log out from session """
+    session.clear()
+    return redirect("/")
+
+
 app.run(
-    host=os.getenv("IP"), port=int(os.getenv("PORT")), debug=True)
-
-
-""" if __name__=="__main__": app.run(host=os.environ.get("IP","0.0.0.0"
-),port=int(os.environ.get("PORT","5000")),debug=True
-    )"""
+    host=os.getenv("IP", "0.0.0.0"),
+    port=int(os.getenv("PORT", "5000")),
+    debug=False)
